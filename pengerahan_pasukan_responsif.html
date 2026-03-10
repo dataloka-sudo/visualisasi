@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengerahan Pasukan AS & Sekutu di Timur Tengah</title>
+    <!-- Google Fonts: Source Sans Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 25px 30px 20px 30px;
+            text-align: center;
+        }
+
+        /* Judul */
+        .main-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 10px 0 5px 0;
+            line-height: 1.3;
+            text-shadow: 2px 2px 0 #e0e0e0;
+        }
+
+        .sub-date {
+            font-size: 1.2rem;
+            color: #b22222;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: #fff0f0;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 40px;
+        }
+
+        /* Map wrapper agar iframe responsif */
+        .map-wrapper {
+            border: 5px solid #1e3a5f;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 20, 40, 0.3);
+            margin: 25px auto;
+            background: #eef;
+            max-width: 100%;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%; /* Aspect ratio 4:3 (800x600 = 4:3) */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer - flex dengan sumber di kiri dan logo di kanan */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px dashed #ccc;
+            padding-top: 20px;
+            margin-top: 15px;
+        }
+
+        .sumber {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .sumber .inss {
+            font-weight: 700;
+            color: #a52a2a;
+            background: #ffefdb;
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin: 0;
+        }
+
+        .logo-footer {
+            max-width: 120px; /* Ukuran logo di footer */
+            width: 100%;
+            height: auto;
+        }
+
+        /* Sembunyikan elemen visualisasi */
+        .visualisasi {
+            display: none;
+        }
+
+        /* Responsif */
+        @media (max-width: 700px) {
+            .main-title {
+                font-size: 1.6rem;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .sumber {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .main-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Judul dan tanggal -->
+        <h1 class="main-title">Pengerahan Pasukan AS dan Sekutu<br>di Timur Tengah</h1>
+        <div class="sub-date">8 Maret 2026</div>
+
+        <!-- Peta interaktif responsif -->
+        <div class="map-wrapper">
+            <div class="map-container">
+                <iframe 
+                    src="https://arcg.is/1amTmu3"
+                    title="Peta Pengerahan Pasukan"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Footer dengan sumber di kiri dan logo Dataloka di kanan -->
+        <div class="footer">
+            <div class="sumber">
+                <p class="inss">Sumber: INSS</p>
+            </div>
+            <!-- Logo Dataloka.id di kanan bawah -->
+            <img class="logo-footer" src="https://dataloka.id/wp-content/uploads/2024/08/Logo-Dataloka-1-1.png" alt="Dataloka.id Logo">
+        </div>
+
+        <!-- Kredit ArcGIS di tengah bawah -->
+        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:10px; text-align:center;">Peta interaktif © ArcGIS</p>
+    </div>
+</body>
+</html>
