@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lionel Messi – Goal Involvements</title>
+<style>
+  :root{
+    --bg:#f7f7f8;
+    --ink:#1d1530;
+    --muted:#5e586b;
+    --line:#a4a4a8;
+    --goal:#e83f4b;
+    --assist:#7243d7;
+    --flag:#75acd8;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    margin:0;
+    width:100%;
+    background:var(--bg);
+    font-family:Inter,Arial,Helvetica,sans-serif;
+  }
+
+  .viz{
+    width:100%;
+    max-width:1536px;
+    margin:0 auto;
+    background:var(--bg);
+  }
+
+  svg{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  .event{
+    cursor:pointer;
+    transition:opacity .15s ease, transform .15s ease;
+    transform-box:fill-box;
+    transform-origin:center;
+  }
+
+  .event:hover{
+    opacity:.78;
+    transform:scale(1.08);
+  }
+
+  .tooltip{
+    position:fixed;
+    z-index:20;
+    pointer-events:none;
+    opacity:0;
+    transform:translate(-50%,-115%);
+    background:#1f1930;
+    color:white;
+    padding:8px 10px;
+    border-radius:7px;
+    font-size:13px;
+    line-height:1.35;
+    white-space:nowrap;
+    box-shadow:0 5px 18px rgba(0,0,0,.18);
+    transition:opacity .08s ease;
+  }
+
+  .tooltip.show{opacity:1}
+
+  @media (prefers-reduced-motion:reduce){
+    .event,.tooltip{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="viz" id="viz">
+  <svg id="chart" viewBox="0 0 1536 1152" role="img" aria-labelledby="title desc">
+    <title id="title">Lionel Messi, Argentina, FIFA World Cup 2026</title>
+    <desc id="desc">Visualisasi delapan gol, empat assist, dua belas keterlibatan gol, dan 620 menit bermain.</desc>
+
+    <defs>
+      <linearGradient id="assistFade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#7243d7" stop-opacity=".08"/>
+        <stop offset="100%" stop-color="#7243d7" stop-opacity=".94"/>
+      </linearGradient>
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".14"/>
+      </filter>
+    </defs>
+
+    <!-- Header -->
+    <g>
+      <rect x="46" y="62" width="79" height="55" rx="1" fill="#fff" stroke="#d8d8dc"/>
+      <rect x="46" y="62" width="79" height="18.4" fill="#75acd8"/>
+      <rect x="46" y="98.6" width="79" height="18.4" fill="#75acd8"/>
+      <circle cx="85.5" cy="89.5" r="6.8" fill="#e5b853" opacity=".88"/>
+
+      <text x="150" y="94" font-size="43" font-weight="800" fill="#1d1530">Lionel Messi</text>
+      <text x="150" y="126" font-size="24" font-weight="500" fill="#2d273c">Argentina | FIFA World Cup 2026</text>
+
+      <g transform="translate(1092,70)">
+        <g fill="#e11d5d">
+          <rect x="0" y="32" width="10" height="10" rx="1"/>
+          <rect x="12" y="20" width="10" height="10" rx="1"/>
+          <rect x="24" y="8" width="10" height="10" rx="1"/>
+          <rect x="36" y="-4" width="10" height="10" rx="1"/>
+          <rect x="24" y="20" width="10" height="10" rx="1"/>
+          <rect x="36" y="8" width="10" height="10" rx="1"/>
+          <rect x="48" y="-4" width="10" height="10" rx="1"/>
+        </g>
+        <text x="70" y="31" font-size="38" font-weight="800" fill="#211832">Opta</text>
+        <text x="168" y="31" font-size="38" font-weight="400" fill="#211832">Analyst</text>
+      </g>
+    </g>
+
+    <!-- Pitch -->
+    <g id="pitch" fill="none" stroke="#9e9ea2" stroke-width="2.2">
+      <rect x="88" y="205" width="958" height="752"/>
+      <line x1="88" y1="205" x2="1046" y2="205"/>
+      <line x1="88" y1="957" x2="1046" y2="957"/>
+      <line x1="88" y1="205" x2="88" y2="957"/>
+      <line x1="1046" y1="205" x2="1046" y2="957"/>
+
+      <rect x="290" y="205" width="555" height="257"/>
+      <rect x="442" y="205" width="251" height="90"/>
+      <rect x="512" y="174" width="111" height="31"/>
+      <path d="M463 462 A107 107 0 0 0 671 462"/>
+      <circle cx="567" cy="379" r="3.8" fill="#9e9ea2" stroke="none"/>
+
+      <path d="M433 957 A134 134 0 0 1 701 957"/>
+      <circle cx="567" cy="957" r="3.8" fill="#9e9ea2" stroke="none"/>
+    </g>
+
+    <!-- Assist lines -->
+    <g stroke-linecap="round" fill="none" stroke-width="3.2">
+      <line class="event" data-tip="Assist 1 · umpan ke penerima" x1="88" y1="212" x2="510" y2="278" stroke="url(#assistFade)"/>
+      <line class="event" data-tip="Assist 2 · umpan ke penerima" x1="544" y1="257" x2="648" y2="272" stroke="url(#assistFade)"/>
+      <line class="event" data-tip="Assist 3 · umpan ke penerima" x1="590" y1="314" x2="833" y2="603" stroke="url(#assistFade)"/>
+      <line class="event" data-tip="Assist 4 · umpan ke penerima" x1="794" y1="420" x2="646" y2="550" stroke="url(#assistFade)"/>
+    </g>
+
+    <!-- Pass start and received points -->
+    <g fill="#7243d7">
+      <circle class="event" data-tip="Awal umpan assist" cx="88" cy="212" r="6.4"/>
+      <circle class="event" data-tip="Penerima umpan assist" cx="510" cy="278" r="7.1"/>
+
+      <circle class="event" data-tip="Awal umpan assist" cx="544" cy="257" r="6.4"/>
+      <circle class="event" data-tip="Penerima umpan assist" cx="648" cy="272" r="7.1"/>
+
+      <circle class="event" data-tip="Awal umpan assist" cx="590" cy="314" r="6.4"/>
+      <circle class="event" data-tip="Penerima umpan assist" cx="833" cy="603" r="7.1"/>
+
+      <circle class="event" data-tip="Awal umpan assist" cx="794" cy="420" r="6.4"/>
+      <circle class="event" data-tip="Penerima umpan assist" cx="646" cy="550" r="7.1"/>
+    </g>
+
+    <!-- Goal points -->
+    <g fill="#e83f4b" stroke="#f7f7f8" stroke-width="2.2" filter="url(#softShadow)">
+      <circle class="event" data-tip="Gol 1" cx="476" cy="258" r="12"/>
+      <circle class="event" data-tip="Gol 2" cx="650" cy="250" r="12"/>
+      <circle class="event" data-tip="Gol 3" cx="546" cy="324" r="12"/>
+      <circle class="event" data-tip="Gol 4" cx="617" cy="357" r="12"/>
+      <circle class="event" data-tip="Gol 5" cx="543" cy="420" r="12"/>
+      <circle class="event" data-tip="Gol 6" cx="543" cy="454" r="12"/>
+      <circle class="event" data-tip="Gol 7" cx="513" cy="512" r="12"/>
+      <circle class="event" data-tip="Gol 8" cx="582" cy="568" r="12"/>
+    </g>
+
+    <!-- Stats -->
+    <g>
+      <circle cx="1180" cy="276" r="39" fill="#e83f4b" opacity=".72"/>
+      <circle cx="1180" cy="276" r="39" fill="none" stroke="#e83f4b" stroke-width="3"/>
+      <text x="1180" y="288" text-anchor="middle" font-size="31" font-weight="800" fill="white">8</text>
+      <text x="1238" y="284" font-size="23" font-weight="700" fill="#5e586b">goals</text>
+
+      <circle cx="1180" cy="380" r="39" fill="#7243d7" opacity=".77"/>
+      <circle cx="1180" cy="380" r="39" fill="none" stroke="#7243d7" stroke-width="3"/>
+      <text x="1180" y="392" text-anchor="middle" font-size="31" font-weight="800" fill="white">4</text>
+      <text x="1238" y="388" font-size="23" font-weight="700" fill="#5e586b">assists</text>
+
+      <text x="1154" y="496" font-size="34" font-weight="800" fill="#1d1530">12</text>
+      <text x="1238" y="496" font-size="22" font-weight="700" fill="#5e586b">involvements</text>
+
+      <text x="1140" y="602" font-size="34" font-weight="800" fill="#1d1530">620</text>
+      <text x="1238" y="602" font-size="22" font-weight="700" fill="#5e586b">minutes</text>
+
+      <line x1="1149" y1="720" x2="1340" y2="720" stroke="url(#assistFade)" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="1340" cy="720" r="7" fill="#7243d7"/>
+      <text x="1149" y="756" text-anchor="middle" font-size="20" font-weight="700" fill="#b0adb7">Pass</text>
+      <text x="1149" y="784" text-anchor="middle" font-size="20" font-weight="700" fill="#b0adb7">Start</text>
+      <text x="1340" y="756" text-anchor="middle" font-size="20" font-weight="700" fill="#b0adb7">Pass</text>
+      <text x="1340" y="784" text-anchor="middle" font-size="20" font-weight="700" fill="#b0adb7">Received</text>
+    </g>
+  </svg>
+</div>
+
+<div class="tooltip" id="tooltip" aria-hidden="true"></div>
+
+<script>
+  const tooltip = document.getElementById('tooltip');
+  const events = document.querySelectorAll('[data-tip]');
+
+  events.forEach(el => {
+    el.addEventListener('pointerenter', () => {
+      tooltip.textContent = el.dataset.tip;
+      tooltip.classList.add('show');
+      tooltip.setAttribute('aria-hidden','false');
+    });
+
+    el.addEventListener('pointermove', e => {
+      tooltip.style.left = `${e.clientX}px`;
+      tooltip.style.top = `${e.clientY}px`;
+    });
+
+    el.addEventListener('pointerleave', () => {
+      tooltip.classList.remove('show');
+      tooltip.setAttribute('aria-hidden','true');
+    });
+  });
+
+  function reportHeight(){
+    const h = document.documentElement.scrollHeight;
+    window.parent.postMessage({type:'responsive-football-chart', height:h}, '*');
+  }
+
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+  new ResizeObserver(reportHeight).observe(document.getElementById('viz'));
+</script>
+</body>
+</html>
